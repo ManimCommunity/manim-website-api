@@ -22,7 +22,7 @@ jobs:
           USERNAME: ${{ github.actor }}
       - name: Build image
         run: |
-          docker build --tag ghcr.io/ManimCommunity/manim-website-api:latest .
+          docker build --tag ghcr.io/manimcommunity/manim-website-api:latest .
       - name: Deploy image
         run: |
-          docker push ghcr.io/ManimCommunity/manim-website-api:latest
+          docker push ghcr.io/manimcommunity/manim-website-api:latest
