@@ -1,0 +1,28 @@
+name: Deply Docker Image
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  deploy:
+    permissions:
+      contents: read
+      packages: write
+    runs-on: ubuntu-latest
+    if: (github.repository == 'ManimCommunity/manim-website-api' && github.event_name == 'push' && github.ref == 'refs/heads/main')
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Log in
+        run: |
+          echo "$TOKEN" | docker login ghcr.io --username "$USERNAME" --password-stdin
+        env:
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          USERNAME: ${{ github.actor }}
+      - name: Build image
+        run: |
+          docker build --tag ghcr.io/ManimCommunity/manim-website-api:latest .
+      - name: Deploy image
+        run: |
+          docker push ghcr.io/ManimCommunity/manim-website-api:latest
