@@ -10,7 +10,10 @@ from dotenv import load_dotenv
 from datetime import datetime
 from flask import Flask, request
 from flask_cors import CORS, cross_origin
-from supabase import create_client, Client
+# from supabase import create_client, Client
+from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import select
+from tables import video_table
 
 from helper import get_youtube_channel_id_from_custom_name
 
@@ -26,9 +29,9 @@ VIDEOS_PER_PAGE = 30
 TMP_FILE = "/tmp/data.json"
 
 load_dotenv()
-url: str = os.environ.get("SUPABASE_URL")
-key: str = os.environ.get("SUPABASE_KEY")
-supabase: Client = create_client(url, key)
+# url: str = os.environ.get("SUPABASE_URL")
+# key: str = os.environ.get("SUPABASE_KEY")
+# supabase: Client = create_client(url, key)
 
 
 def now():
