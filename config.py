@@ -15,7 +15,5 @@ README_URL = (
 VIDEOS_PER_PAGE = 30
 TMP_FILE = "/tmp/data.json"
 
-# url: str = os.environ.get("SUPABASE_URL")
-# key: str = os.environ.get("SUPABASE_KEY")
-SQLALCHEMY_DATABASE_URI = os.environ.get("SQLALCHEMY_DATABASE_URI")
 # SQLALCHEMY_DATABASE_URI = "sqlite:///db.sqlite"
+SQLALCHEMY_DATABASE_URI = os.environ.get("SQLALCHEMY_DATABASE_URI")

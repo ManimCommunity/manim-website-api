@@ -1,17 +1,13 @@
-from dotenv import load_dotenv
+import json
 from flask import Flask, request
 from flask_cors import CORS, cross_origin
 
-# from supabase import create_client, Client
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import select
+from sqlalchemy import select, desc
 from tables import video_table, Base
 
 from config import *
-from update_entries import update_entries
-
-
-# supabase: Client = create_client(url, key)
+from scrape import scrape_rss_feeds
 
 
 app = Flask(__name__)
@@ -32,22 +28,37 @@ Base.metadata.create_all(bind=db.engine)
 def videos(page_id: int):
     if page_id <= 0:
         return "[]"
-    rows = (
-        supabase.table("video")
-        .select("*")
-        .eq("is_manim_video", True)
-        .order("published", desc=True)
-        .range((page_id - 1) * VIDEOS_PER_PAGE, page_id * VIDEOS_PER_PAGE)
-        .execute()
+    stmt = (
+        select(
+            [
+                video_table.c.title,
+                video_table.c.author,
+                video_table.c.yt_videoid,
+                video_table.c.link,
+                video_table.c.summary,
+                video_table.c.published,
+                video_table.c.updated,
+                video_table.c.thumbnail_url,
+                video_table.c.view_count,
+                video_table.c.like_count,
+            ]
+        )
+        .where(video_table.c.is_manim_video == True)
+        .order_by(desc(video_table.columns.published))
+        .offset((page_id - 1) * VIDEOS_PER_PAGE)
+        .limit(VIDEOS_PER_PAGE)
     )
-    return rows.json()
+    response = db.session.execute(stmt)
+    rows = response.fetchall()
+    result = {"data": [dict(row) for row in rows]}
+    return json.dumps(result, default=str)
 
 
 @app.route("/update")
 def update():
     if "X-Appengine-Cron" in request.headers:
         if request.headers["X-Appengine-Cron"] == "true":
-            update_entries(db)
+            scrape_rss_feeds(db)
             return "Update complete", 200
 
     return "Forbidden", 403
