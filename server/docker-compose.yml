@@ -73,8 +73,7 @@ services:
     restart: always
 
   app:
-    #image: ghcr.io/manimcommunity/manim-website-api:latest
-    image: ghcr.io/msys2/msys2-web:latest
+    image: ghcr.io/manimcommunity/manim-website-api:latest
     logging: *default-logging
     labels:
       - "traefik.enable=true"
