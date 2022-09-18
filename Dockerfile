@@ -13,7 +13,7 @@ RUN pip install --no-cache-dir --upgrade -r /app/requirements.txt
 COPY . /app
 ENV PYTHONPATH=/app
 
-ENTRYPOINT ["gunicorn", "-k", "uvicorn.workers.UvicornWorker", "--access-logfile", "-", "--bind", "0.0.0.0:80", "--timeout", "60", "app:app"]
+ENTRYPOINT ["gunicorn", "--access-logfile", "-", "--bind", "0.0.0.0:80", "--timeout", "60", "app:app"]
 
 EXPOSE 80
 
