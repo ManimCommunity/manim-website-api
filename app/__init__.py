@@ -19,6 +19,6 @@ db = SQLAlchemy(app)
 Base.query = db.session.query_property()
 Base.metadata.create_all(bind=db.engine)
 update_requests = Queue()
-last_update: datetime.datetime = None
+last_update: int = 0
 
 from .main import *

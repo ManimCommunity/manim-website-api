@@ -10,7 +10,7 @@ import feedparser
 import requests
 from sqlalchemy.dialects.mysql import insert
 
-from . import db, update_requests
+from . import db, update_requests, last_update
 from .config import *
 from .crud import query_video
 from .helper import (get_youtube_channel_id_from_custom_name, is_manim_video,
@@ -108,12 +108,12 @@ def trigger_loop() -> None:
         queue_update()
 
 def update_loop():
+    global last_update
     # trigger this loop to run every UPDATE_INTERVAL seconds
     threading.Thread(target=trigger_loop, daemon=True).start()
-    last_updated = 0
     while True:
         item = update_requests.get()
-        if item and (time.time() - last_updated > UPDATE_INTERVAL):
+        if item and (time.time() - last_update > UPDATE_INTERVAL):
             print("updating rss feeds")
             try:
                 scrape_rss_feeds()
@@ -121,6 +121,6 @@ def update_loop():
             except Exception:
                 traceback.print_exc(file=sys.stdout)
             print("Waiting for next update")
-            last_updated = time.time()
+            last_update = time.time()
         else:
             print("already updated recently")
