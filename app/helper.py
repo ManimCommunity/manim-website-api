@@ -1,10 +1,10 @@
-import re
-import os
 import json
-from youtube_search import Service
+import os
+import re
 from datetime import datetime
-from config import TMP_FILE
 
+from .config import TMP_FILE
+from .youtube_search import Service
 
 
 def extract_channel_id_from_rss_link(str):

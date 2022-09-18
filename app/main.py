@@ -1,14 +1,13 @@
 from functools import lru_cache
-from flask import Flask, request, jsonify
+
+from flask import Flask, jsonify, request
 from flask_cors import CORS, cross_origin
-
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import select, desc
-from tables import video_table, Base
+from sqlalchemy import desc, select
 
-from config import *
-from scrape import scrape_rss_feeds
-
+from .config import *
+from .scrape import scrape_rss_feeds
+from .tables import Base, video_table
 
 app = Flask(__name__)
 cors = CORS(app)

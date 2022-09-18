@@ -1,18 +1,19 @@
+import json
+import logging
 import re
 import time
-import json
-import requests
-import feedparser
 import traceback
-import logging
 from datetime import datetime
 
-from sqlalchemy.dialects.mysql import insert
+import feedparser
+import requests
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.dialects.mysql import insert
 
-from config import *
-from tables import video_table, Base
-from helper import get_youtube_channel_id_from_custom_name, is_manim_video, sanitize
+from .config import *
+from .helper import (get_youtube_channel_id_from_custom_name, is_manim_video,
+                     sanitize)
+from .tables import Base, video_table
 
 
 def scrape_rss_feeds(db: SQLAlchemy):
