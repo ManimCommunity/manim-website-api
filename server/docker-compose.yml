@@ -31,8 +31,6 @@ services:
       - "--providers.file.directory=/configs/"
       - "--entryPoints.web.address=:80"
       - "--entryPoints.web-secure.address=:443"
-      # TODO: remove when actually deployed
-      - "--certificatesresolvers.le.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory"
       - "--certificatesResolvers.le.acme.email=naveen@manim.community"
       - "--certificatesResolvers.le.acme.storage=/letsencrypt/acme.json"
       - "--certificatesResolvers.le.acme.keyType=EC256"
