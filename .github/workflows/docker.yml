@@ -14,15 +14,24 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - name: Log in
-        run: |
-          echo "$TOKEN" | docker login ghcr.io --username "$USERNAME" --password-stdin
-        env:
-          TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          USERNAME: ${{ github.actor }}
-      - name: Build image
-        run: |
-          docker build --tag ghcr.io/manimcommunity/manim-website-api:latest .
-      - name: Deploy image
-        run: |
-          docker push ghcr.io/manimcommunity/manim-website-api:latest
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Build and push
+        uses: docker/build-push-action@v3
+        with:
+          platforms: linux/arm64
+          push: true
+          file: Dockerfile
+          tags: |
+            ghcr.io/manimcommunity/manim-website-api:latest
