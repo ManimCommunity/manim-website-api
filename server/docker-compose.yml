@@ -64,7 +64,7 @@ services:
       # - "8080:8080" # for debug interface on 8080
     volumes:
       - ./traefik-tls.yml:/configs/traefik-tls.yml:ro
-      - letsencrypt:/letsencrypt/
+      - letsencrypt-1:/letsencrypt/
     networks:
       - default
       - docker-sock
@@ -95,7 +95,7 @@ services:
     restart: always
 
 volumes:
-  letsencrypt:
+  letsencrypt-1:
 
 networks:
   default:
