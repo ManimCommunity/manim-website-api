@@ -2,3 +2,4 @@
 env_variables.yaml
 __pycache__
 .vscode
+*.env
