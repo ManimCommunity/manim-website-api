@@ -1,5 +1,5 @@
 import json
-from flask import Flask, request
+from flask import Flask, request, jsonify
 from flask_cors import CORS, cross_origin
 
 from flask_sqlalchemy import SQLAlchemy
@@ -51,7 +51,7 @@ def videos(page_id: int):
     response = db.session.execute(stmt)
     rows = response.fetchall()
     result = {"data": [dict(row) for row in rows]}
-    return json.dumps(result, default=str)
+    return jsonify(result)
 
 
 @app.route("/update")
