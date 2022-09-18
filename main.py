@@ -1,4 +1,4 @@
-import json
+from functools import lru_cache
 from flask import Flask, request, jsonify
 from flask_cors import CORS, cross_origin
 
@@ -22,12 +22,8 @@ db = SQLAlchemy(app)
 Base.query = db.session.query_property()
 Base.metadata.create_all(bind=db.engine)
 
-
-@app.route("/videos/<int:page_id>")
-@cross_origin()
-def videos(page_id: int):
-    if page_id <= 0:
-        return "[]"
+@lru_cache(maxsize=None)
+def query_video(page_id):
     stmt = (
         select(
             [
@@ -51,6 +47,14 @@ def videos(page_id: int):
     response = db.session.execute(stmt)
     rows = response.fetchall()
     result = {"data": [dict(row) for row in rows]}
+    return result
+
+@app.route("/videos/<int:page_id>")
+@cross_origin()
+def videos(page_id: int):
+    if page_id <= 0:
+        return "[]"
+    result = query_video(page_id)
     return jsonify(result)
 
 
