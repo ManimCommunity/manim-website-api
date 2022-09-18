@@ -1,22 +1,23 @@
-import json
 import logging
 import re
+import sys
 import time
 import traceback
+import threading
 from datetime import datetime
 
 import feedparser
 import requests
-from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.dialects.mysql import insert
 
+from . import db, update_requests
 from .config import *
+from .crud import query_video
 from .helper import (get_youtube_channel_id_from_custom_name, is_manim_video,
                      sanitize)
-from .tables import Base, video_table
+from .tables import video_table
 
-
-def scrape_rss_feeds(db: SQLAlchemy):
+def scrape_rss_feeds():
     # Get the README content
     # readme_path = Path(__file__).parent.parent.joinpath(Path("README.md")).absolute()
     # content = open(readme_path, "r").read()
@@ -92,19 +93,34 @@ def scrape_rss_feeds(db: SQLAlchemy):
             except:
                 logging.warning(f"Could not insert row: {row}")
                 print(traceback.format_exc())
+    # Reset the cache
+    query_video.cache_clear()
     return None
 
+def queue_update() -> None:
+    update_requests.put(True)
 
-# Run this as a standalone script to scrape all the channels
-if __name__ == "__main__":
-    from flask import Flask
 
-    app = Flask(__name__)
-    app.config["SQLALCHEMY_DATABASE_URI"] = SQLALCHEMY_DATABASE_URI
-    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+def trigger_loop() -> None:
+    while True:
+        print("Sleeping for %ds" % UPDATE_INTERVAL)
+        time.sleep(UPDATE_INTERVAL)
+        queue_update()
 
-    db = SQLAlchemy(app)
-    Base.query = db.session.query_property()
-    Base.metadata.create_all(bind=db.engine)
-
-    scrape_rss_feeds(db)
+def update_loop():
+    # trigger this loop to run every UPDATE_INTERVAL seconds
+    threading.Thread(target=trigger_loop, daemon=True).start()
+    last_updated = 0
+    while True:
+        item = update_requests.get()
+        if item and (time.time() - last_updated > UPDATE_INTERVAL):
+            print("updating rss feeds")
+            try:
+                scrape_rss_feeds()
+                print("done")
+            except Exception:
+                traceback.print_exc(file=sys.stdout)
+            print("Waiting for next update")
+            last_updated = time.time()
+        else:
+            print("already updated recently")

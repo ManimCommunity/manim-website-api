@@ -6,6 +6,7 @@ load_dotenv()
 
 CRAWL_DELAY = 5
 SECONDS_IN_DAY = 24 * 60 * 60
+UPDATE_INTERVAL = 4 * 60 * 60 # Run every 4 hours
 README_URL = (
     "https://raw.githubusercontent.com/ManimCommunity/awesome-manim/main/README.md"
 )
