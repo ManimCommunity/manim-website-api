@@ -20,7 +20,13 @@ def videos(page_id: int):
     if page_id <= 0:
         return "[]"
     result = query_video(page_id)
-    return jsonify(result)
+    res = jsonify(result)
+    res.add_etag()
+    # Cache the result for 1 day
+    res.cache_control.max_age = SECONDS_IN_DAY
+    res.cache_control.public = True
+    return res
+
 
 @app.get("/update")
 def update():
