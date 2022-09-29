@@ -15,6 +15,7 @@ def query_video(page_id):
                 video_table.c.title,
                 video_table.c.author,
                 video_table.c.yt_videoid,
+                video_table.c.yt_channelid,
                 video_table.c.link,
                 video_table.c.summary,
                 video_table.c.published,
