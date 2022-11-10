@@ -4,8 +4,8 @@ x-logging:
   &default-logging
   driver: 'json-file'
   options:
-    max-size: '20m'
-    max-file: '5'
+    max-size: '100m'
+    max-file: '10'
 
 services:
   docker-proxy:
@@ -55,7 +55,7 @@ services:
     logging:
       << : *default-logging
       options:
-        max-size: "50m"
+        max-size: "100m"
         max-file: "20"
     ports:
       - "80:80"
