@@ -9,3 +9,7 @@ updates:
     package-ecosystem: "pip"
     schedule:
       interval: "weekly"
+  - directory: "/server"
+    package-ecosystem: "docker"
+    schedule:
+      interval: "weekly"
