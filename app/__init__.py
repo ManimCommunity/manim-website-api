@@ -16,7 +16,8 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db = SQLAlchemy(app)
 Base.query = db.session.query_property()
-Base.metadata.create_all(bind=db.engine)
+with app.app_context():
+    Base.metadata.create_all(bind=db.engine)
 update_requests = Queue()
 last_update: int = 0
 
