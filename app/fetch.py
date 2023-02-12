@@ -10,7 +10,7 @@ import feedparser
 import requests
 from sqlalchemy.dialects.mysql import insert
 
-from . import db, update_requests, last_update
+from . import db, update_requests, last_update, app
 from .config import *
 from .crud import query_video
 from .helper import (get_youtube_channel_id_from_custom_name, is_manim_video,
@@ -88,8 +88,9 @@ def scrape_rss_feeds():
                 on_duplicate_key_stmt = insert_stmt.on_duplicate_key_update(
                     updated_at=current_time, **row
                 )
-                response = db.session.execute(on_duplicate_key_stmt)
-                db.session.commit()
+                with app.app_context():
+                    response = db.session.execute(on_duplicate_key_stmt)
+                    db.session.commit()
             except:
                 logging.warning(f"Could not insert row: {row}")
                 print(traceback.format_exc())
