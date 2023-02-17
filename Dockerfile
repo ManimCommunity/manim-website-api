@@ -1,7 +1,7 @@
 FROM python:3.11-slim-bullseye as requirements-stage
 
 WORKDIR /tmp
-RUN python -m pip install "poetry==1.2.0"
+RUN python -m pip install "poetry==1.2.2"
 COPY ./pyproject.toml ./poetry.lock* /tmp/
 RUN poetry export -f requirements.txt --output requirements.txt --without-hashes
 
