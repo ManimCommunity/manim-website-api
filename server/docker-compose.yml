@@ -71,6 +71,16 @@ services:
       - docker-sock
     restart: always
 
+  db:
+    image: mysql:8
+    restart: always
+    cap_add:
+      - SYS_NICE
+    env_file:
+      - ./mysql.env
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
   app:
     image: ghcr.io/manimcommunity/manim-website-api:latest
     logging: *default-logging
@@ -91,6 +101,10 @@ services:
       - "traefik.http.routers.app-router-secure.entrypoints=web-secure"
     env_file:
       - ./mysql.env
+    depends_on:
+      - db
+    links:
+      - db
     environment:
       FORWARDED_ALLOW_IPS: "*"
     restart: always
