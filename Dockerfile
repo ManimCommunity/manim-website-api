@@ -12,8 +12,10 @@ COPY --from=requirements-stage /tmp/requirements.txt /app/requirements.txt
 RUN pip install --no-cache-dir --upgrade -r /app/requirements.txt
 COPY . /app
 ENV PYTHONPATH=/app
+COPY ./start.sh /start.sh
+RUN chmod +x /start.sh
 
-ENTRYPOINT ["gunicorn", "--access-logfile", "-", "--bind", "0.0.0.0:80", "--timeout", "60", "app:app"]
+ENTRYPOINT ["/start.sh"]
 
 EXPOSE 80
 
