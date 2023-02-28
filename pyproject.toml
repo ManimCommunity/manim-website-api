@@ -9,7 +9,7 @@ packages = [{include = "manim_website_api"}]
 [tool.poetry.dependencies]
 python = "^3.8"
 feedparser = "^6.0"
-flask = "^2.1"
+flask = "^2.2"
 requests = "^2"
 python-dotenv = "^0.21"
 flask-cors = "^3.0"
