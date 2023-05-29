@@ -436,14 +436,14 @@ grpcio-gcp = ["grpcio-gcp (>=0.2.2,<1.0dev)"]
 
 [[package]]
 name = "google-api-python-client"
-version = "2.72.0"
+version = "2.87.0"
 description = "Google API Client Library for Python"
 category = "main"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "google-api-python-client-2.72.0.tar.gz", hash = "sha256:0ddf4a44256d4516635578b93a9ac0dfba7d8bd357cd896e68ef9c549a840b2f"},
-    {file = "google_api_python_client-2.72.0-py2.py3-none-any.whl", hash = "sha256:271b49fc9ce6c133620169e6ca4a92682b92c288444e6e00a51f78072b42169c"},
+    {file = "google-api-python-client-2.87.0.tar.gz", hash = "sha256:bbea5869877c822d12d318943833d988497b3a18b9ca2386967118074db676f3"},
+    {file = "google_api_python_client-2.87.0-py2.py3-none-any.whl", hash = "sha256:29b52232b159be72a79890b6d9f703cf6d8ebbec0ef6371c5670c1abeca5a9f9"},
 ]
 
 [package.dependencies]
@@ -1344,4 +1344,4 @@ testing = ["flake8 (<5)", "func-timeout", "jaraco.functools", "jaraco.itertools"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "3e6641a373f5d6a89f00f2f175b67bf0d1485bbe11d30a09311fa64d6f4a7aa7"
+content-hash = "db23a8079c34abd26ece6da66b59ff3e0cd38ef2b04e784d6e66ad9b4da4d24c"
