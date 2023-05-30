@@ -1,12 +1,15 @@
 import os
+
+import certifi
 from dotenv import load_dotenv
 
 load_dotenv()
 
 
 CRAWL_DELAY = 5
+SECONDS_IN_HOUR = 60 * 60
 SECONDS_IN_DAY = 24 * 60 * 60
-UPDATE_INTERVAL = 4 * 60 * 60 # Run every 4 hours
+UPDATE_INTERVAL = 4 * 60 * 60  # Run every 4 hours
 README_URL = (
     "https://raw.githubusercontent.com/ManimCommunity/awesome-manim/main/README.md"
 )
@@ -18,3 +21,6 @@ TMP_FILE = "/tmp/data.json"
 
 # SQLALCHEMY_DATABASE_URI = "sqlite:///db.sqlite"
 SQLALCHEMY_DATABASE_URI = os.environ.get("SQLALCHEMY_DATABASE_URI")
+SQLALCHEMY_ENGINE_OPTIONS = {
+    "connect_args": {"ssl": {"ca": certifi.where()}, "ssl_verify_identity": True}
+}

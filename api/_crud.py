@@ -2,13 +2,12 @@ from functools import lru_cache
 
 from sqlalchemy import desc, select
 
-from . import db
-from .config import VIDEOS_PER_PAGE
-from .tables import video_table
+from ._config import VIDEOS_PER_PAGE
+from ._tables import video_table
 
 
 @lru_cache(maxsize=None)
-def query_video(page_id):
+def query_video(page_id, db):
     stmt = (
         select(
             [
@@ -31,6 +30,7 @@ def query_video(page_id):
         .limit(VIDEOS_PER_PAGE)
     )
     response = db.session.execute(stmt)
+    print(response)
     rows = response.fetchall()
     result = {"data": [dict(row) for row in rows]}
     return result
