@@ -1,0 +1,32 @@
+name: Deply Docker Image
+
+on:
+  workflow_dispatch:
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    - cron:  '30 5 * * *'
+
+jobs:
+  deploy:
+    environment:
+      name: deploy
+    runs-on: ubuntu-latest
+    if: (github.repository == 'ManimCommunity/manim-website-api')
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+          cache: 'poetry'
+
+      - name: Install dependencies
+        run: |
+          pipx install poetry
+          poetry install
+
+      - name: Run the updator
+        env:
+          SQLALCHEMY_DATABASE_URI: ${{ secrets.SQLALCHEMY_DATABASE_URI }}
+        run: |
+          poetry run python -m updator
