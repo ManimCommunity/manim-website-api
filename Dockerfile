@@ -12,10 +12,10 @@ COPY --from=requirements-stage /tmp/requirements.txt /app/requirements.txt
 RUN pip install --no-cache-dir --upgrade -r /app/requirements.txt
 COPY . /app
 ENV PYTHONPATH=/app
-COPY ./start.sh /start.sh
-RUN chmod +x /start.sh
+COPY ./build.sh /build.sh
+RUN chmod +x /build.sh
 
-ENTRYPOINT ["/start.sh"]
+ENTRYPOINT ["/build.sh"]
 
 EXPOSE 80
 
