@@ -1,4 +1,4 @@
-name: Deply Docker Image
+name: Update Database
 
 on:
   workflow_dispatch:
