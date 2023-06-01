@@ -5,3 +5,6 @@ __pycache__
 *.env
 server/mysql.env
 .venv/
+*.sql
+.vercel
+public/

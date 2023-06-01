@@ -3,7 +3,7 @@ import os
 import re
 from datetime import datetime
 
-from .config import TMP_FILE
+from api._config import TMP_FILE
 from .youtube_search import Service
 
 

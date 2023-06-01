@@ -1,21 +1,27 @@
 import logging
 import re
-import sys
 import time
 import traceback
-import threading
 from datetime import datetime
 
 import feedparser
 import requests
 from sqlalchemy.dialects.mysql import insert
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
 
-from . import db, update_requests, last_update, app
-from .config import *
-from .crud import query_video
+# from ..api import db, app
+from api._config import *
+from api._crud import query_video
 from .helper import (get_youtube_channel_id_from_custom_name, is_manim_video,
                      sanitize)
-from .tables import video_table
+from api._tables import video_table
+
+engine = create_engine(
+    SQLALCHEMY_DATABASE_URI,
+    **SQLALCHEMY_ENGINE_OPTIONS
+)
+Session = sessionmaker(engine)
 
 def scrape_rss_feeds():
     # Get the README content
@@ -88,9 +94,9 @@ def scrape_rss_feeds():
                 on_duplicate_key_stmt = insert_stmt.on_duplicate_key_update(
                     updated_at=current_time, **row
                 )
-                with app.app_context():
-                    response = db.session.execute(on_duplicate_key_stmt)
-                    db.session.commit()
+                with Session() as session:
+                    response = session.execute(on_duplicate_key_stmt)
+                    session.commit()
             except:
                 logging.warning(f"Could not insert row: {row}")
                 print(traceback.format_exc())
@@ -98,30 +104,5 @@ def scrape_rss_feeds():
     query_video.cache_clear()
     return None
 
-def queue_update() -> None:
-    update_requests.put(True)
-
-
-def trigger_loop() -> None:
-    while True:
-        print("Sleeping for %ds" % UPDATE_INTERVAL)
-        time.sleep(UPDATE_INTERVAL)
-        queue_update()
-
-def update_loop():
-    global last_update
-    # trigger this loop to run every UPDATE_INTERVAL seconds
-    threading.Thread(target=trigger_loop, daemon=True).start()
-    while True:
-        item = update_requests.get()
-        if item and (time.time() - last_update > UPDATE_INTERVAL):
-            print("updating rss feeds")
-            try:
-                scrape_rss_feeds()
-                print("done")
-            except Exception:
-                traceback.print_exc(file=sys.stdout)
-            print("Waiting for next update")
-            last_update = time.time()
-        else:
-            print("already updated recently")
+if __name__ == "__main__":
+    scrape_rss_feeds()
