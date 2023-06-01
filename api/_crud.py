@@ -30,7 +30,6 @@ def query_video(page_id, db):
         .limit(VIDEOS_PER_PAGE)
     )
     response = db.session.execute(stmt)
-    print(response)
     rows = response.fetchall()
     result = {"data": [dict(row) for row in rows]}
     return result
