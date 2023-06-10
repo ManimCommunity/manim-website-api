@@ -19,6 +19,7 @@ cryptography = "^39.0.1" # needed by PyMySQL
 [tool.poetry.group.updator.dependencies]
 requests = "^2"
 feedparser = "^6.0"
+google-api-python-client = "^2.51"
 
 [tool.poetry.group.dev.dependencies]
 black = "^23.3.0"
