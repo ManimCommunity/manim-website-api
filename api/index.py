@@ -48,4 +48,4 @@ def videos(page_id: int):
 #     return "Update request received", 200
 
 if __name__ == "__main__":
-    app.run(debug=True, port=3001)
+    print("Use `flask --app=api/index.py run` to run the flask app.")
