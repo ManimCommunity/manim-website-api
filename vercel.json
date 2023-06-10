@@ -4,5 +4,11 @@
             "source": "/videos/(.*)",
             "destination": "/api/index"
         }
+    ],
+    "redirects": [
+        {
+            "source": "/",
+            "destination": "https://www.manim.community"
+        }
     ]
 }
