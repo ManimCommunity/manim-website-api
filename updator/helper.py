@@ -9,12 +9,12 @@ from .youtube_search import Service
 
 def extract_channel_id_from_rss_link(str):
     return re.findall(
-        r"(?<=https://www.youtube.com/feeds/videos.xml\?channel_id=)[0-9a-zA-Z_-]+", str
+        r"(?<=https://www\.youtube\.com/feeds/videos\.xml\?channel_id=)[0-9a-zA-Z_-]+", str
     )
 
 
 def extract_channel_id_from_channel_url(str):
-    return re.findall(r"(?<=https://www.youtube.com/channel/)[0-9a-zA-Z_-]+", str)
+    return re.findall(r"(?<=https://www\.youtube\.com/channel/)[0-9a-zA-Z_-]+", str)
 
 
 def get_youtube_channel_id_from_custom_name(name):

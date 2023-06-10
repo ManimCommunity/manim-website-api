@@ -32,10 +32,10 @@ def scrape_rss_feeds():
     channel_custom_names = []
     # channel_ids.extend(re.findall(r"https://www.youtube.com/channel/[0-9a-zA-Z_-]+", content))
     channel_ids.extend(
-        re.findall(r"(?<=https://www.youtube.com/channel/)[0-9a-zA-Z_-]+", content)
+        re.findall(r"(?<=https://www\.youtube\.com/channel/)[0-9a-zA-Z_-]+", content)
     )
     channel_custom_names.extend(
-        re.findall(r"(?<=https://www.youtube.com/c/)[0-9a-zA-Z_-]+", content)
+        re.findall(r"(?<=https://www\.youtube\.com/c/)[0-9a-zA-Z_-]+", content)
     )
 
     # Try to fetch channel IDs for URLs with custom channel names,
