@@ -12,7 +12,7 @@ python-dotenv = "^0.21"
 flask-cors = "^3.0"
 certifi = "*"
 sqlalchemy = "^1.4.25"
-Flask-SQLAlchemy = "^3.0.3"
+Flask-SQLAlchemy = "^3.0.4"
 PyMySQL = "^1.0.2"
 cryptography = "^41.0.1" # needed by PyMySQL
 
