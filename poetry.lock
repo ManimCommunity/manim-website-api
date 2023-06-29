@@ -426,13 +426,13 @@ Six = "*"
 
 [[package]]
 name = "flask-sqlalchemy"
-version = "3.0.4"
+version = "3.0.5"
 description = "Add SQLAlchemy support to your Flask application."
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "flask_sqlalchemy-3.0.4-py3-none-any.whl", hash = "sha256:23d44ca566b02b0b5ee5b29d81b435079402ad73c116bf9918dbda5b03aa30ba"},
-    {file = "flask_sqlalchemy-3.0.4.tar.gz", hash = "sha256:b812bc7f1bbf5ff3041cbfa0428bb191bed2c342b7bed88c15d7ce01890bfd5d"},
+    {file = "flask_sqlalchemy-3.0.5-py3-none-any.whl", hash = "sha256:cabb6600ddd819a9f859f36515bb1bd8e7dbf30206cc679d2b081dff9e383283"},
+    {file = "flask_sqlalchemy-3.0.5.tar.gz", hash = "sha256:c5765e58ca145401b52106c0f46178569243c5da25556be2c231ecc60867c5b1"},
 ]
 
 [package.dependencies]
@@ -1330,4 +1330,4 @@ testing = ["big-O", "flake8 (<5)", "jaraco.functools", "jaraco.itertools", "more
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "3d7e2f5e8ee1cbabd8f6895edc1472c0d38798966d0ad0db4dc265d71c913f2a"
+content-hash = "f1d2a1c23aabd29d5b07ea00a400ae19ff1eee148b8b1939b33a719113e2f6cd"
