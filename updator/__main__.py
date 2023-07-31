@@ -12,7 +12,7 @@ from sqlalchemy.orm import sessionmaker
 # from ..api import db, app
 from api._config import *
 from api._crud import query_video
-from .helper import get_youtube_channel_id_from_custom_name, is_manim_video, sanitize
+from .helper import get_youtube_channel_id_from_url, is_manim_video, sanitize
 from api._tables import video_table
 
 engine = create_engine(SQLALCHEMY_DATABASE_URI, **SQLALCHEMY_ENGINE_OPTIONS)
@@ -34,22 +34,24 @@ def scrape_rss_feeds():
     channel_ids.extend(
         re.findall(r"(?<=https://www\.youtube\.com/channel/)[0-9a-zA-Z_-]+", content)
     )
+    # add new @ based channel id
     channel_custom_names.extend(
-        re.findall(r"(?<=https://www\.youtube\.com/c/)[0-9a-zA-Z_-]+", content)
+        re.findall(r"(?<=https:\/\/www\.youtube\.com\/)@[\.0-9a-zA-Z_-]+", content)
     )
 
     # Try to fetch channel IDs for URLs with custom channel names,
     # because the RSS API only accepts channel IDs
     for channel_custom_name in channel_custom_names:
         try:
-            channel_id = get_youtube_channel_id_from_custom_name(channel_custom_name)
+            channel_id = get_youtube_channel_id_from_url(channel_custom_name)
             if channel_id:
                 channel_ids.append(channel_id)
                 print("Channel ID for", channel_custom_name, "=", channel_id)
             else:
                 print("Could not get the channel ID for", channel_custom_name)
-        except:
+        except Exception as e:
             print("Could not get the channel ID for", channel_custom_name)
+            print(e)
 
         time.sleep(CRAWL_DELAY)
 

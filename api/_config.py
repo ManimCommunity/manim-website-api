@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-CRAWL_DELAY = 5
+CRAWL_DELAY = 1
 SECONDS_IN_HOUR = 60 * 60
 SECONDS_IN_DAY = 24 * 60 * 60
 UPDATE_INTERVAL = 4 * 60 * 60  # Run every 4 hours

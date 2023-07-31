@@ -1,6 +1,8 @@
 import json
 import os
 import re
+from html.parser import HTMLParser
+import requests
 from datetime import datetime
 
 from api._config import TMP_FILE
@@ -15,6 +17,27 @@ def extract_channel_id_from_rss_link(str):
 
 def extract_channel_id_from_channel_url(str):
     return re.findall(r"(?<=https://www\.youtube\.com/channel/)[0-9a-zA-Z_-]+", str)
+
+def get_youtube_channel_id_from_url(url):
+    class YoutubeHtmlParser(HTMLParser):
+        channel_id = None
+        def handle_starttag(self, tag, attrs):
+            global channel_id
+            if tag != 'link':
+                return
+            attrs = dict(attrs)
+            if attrs.get('rel') != 'canonical':
+                return
+            if self.channel_id is None:
+                self.channel_id = extract_channel_id_from_channel_url(attrs['href'])[0]
+
+    html = requests.get('https://youtube.com/' + url).text
+    
+    parser = YoutubeHtmlParser()
+    parser.feed(html)
+
+    return parser.channel_id
+
 
 
 def get_youtube_channel_id_from_custom_name(name):
