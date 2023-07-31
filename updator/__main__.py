@@ -34,6 +34,12 @@ def scrape_rss_feeds():
     channel_ids.extend(
         re.findall(r"(?<=https://www\.youtube\.com/channel/)[0-9a-zA-Z_-]+", content)
     )
+
+    # old custom channel names with /c/
+    channel_custom_names.extend(
+        re.findall(r"(?<=https:\/\/www\.youtube\.com\/)c\/[0-9a-zA-Z_-]+", content)
+    )
+
     # add new @ based channel id
     channel_custom_names.extend(
         re.findall(r"(?<=https:\/\/www\.youtube\.com\/)@[\.0-9a-zA-Z_-]+", content)
