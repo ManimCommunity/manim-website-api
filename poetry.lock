@@ -459,20 +459,20 @@ grpcio-gcp = ["grpcio-gcp (>=0.2.2,<1.0dev)"]
 
 [[package]]
 name = "google-api-python-client"
-version = "2.88.0"
+version = "2.110.0"
 description = "Google API Client Library for Python"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "google-api-python-client-2.88.0.tar.gz", hash = "sha256:37068453f79ea28e5394a8fe20a4ba620594e7f8541068bea2e844dacdcc9d33"},
-    {file = "google_api_python_client-2.88.0-py2.py3-none-any.whl", hash = "sha256:d003008400a779524ea21b5a3ddc6fc59327d401fb8c37c466d413694c279cae"},
+    {file = "google-api-python-client-2.110.0.tar.gz", hash = "sha256:1f825e48c7fdc3c96ad6aac179cb73c3755dfff41d16487fa7130e5efcfe7b76"},
+    {file = "google_api_python_client-2.110.0-py2.py3-none-any.whl", hash = "sha256:55e7ebd6079e34934b6751537eb13447110351ae3792a724a33825d7b671ba13"},
 ]
 
 [package.dependencies]
-google-api-core = ">=1.31.5,<2.0.dev0 || >2.3.0,<3.0.0dev"
-google-auth = ">=1.19.0,<3.0.0dev"
+google-api-core = ">=1.31.5,<2.0.dev0 || >2.3.0,<3.0.0.dev0"
+google-auth = ">=1.19.0,<3.0.0.dev0"
 google-auth-httplib2 = ">=0.1.0"
-httplib2 = ">=0.15.0,<1dev"
+httplib2 = ">=0.15.0,<1.dev0"
 uritemplate = ">=3.0.1,<5"
 
 [[package]]
@@ -1347,4 +1347,4 @@ testing = ["big-O", "flake8 (<5)", "jaraco.functools", "jaraco.itertools", "more
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "1db132ee980c8e805a27e23219df9ae9266e25eee7344a81f249d26e4353176b"
+content-hash = "0a99e16af5703a2a586d4c644003f83a71a8310ec13cc0e5a964bac9a46e7647"
