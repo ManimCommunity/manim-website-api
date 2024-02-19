@@ -8,7 +8,7 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.8"
 flask = "^3.0"
-python-dotenv = "^0.21"
+python-dotenv = "^1.0"
 flask-cors = "^4.0"
 certifi = "*"
 sqlalchemy = "^1.4.51"
