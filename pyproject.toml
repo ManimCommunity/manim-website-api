@@ -14,7 +14,7 @@ certifi = "*"
 sqlalchemy = "^1.4.51"
 Flask-SQLAlchemy = "^3.0.5"
 PyMySQL = "^1.1.0"
-cryptography = "^42.0.0" # needed by PyMySQL
+cryptography = "^42.0.5" # needed by PyMySQL
 
 [tool.poetry.group.updator.dependencies]
 requests = "^2"
