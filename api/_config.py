@@ -21,6 +21,4 @@ TMP_FILE = "/tmp/data.json"
 
 # SQLALCHEMY_DATABASE_URI = "sqlite:///db.sqlite"
 SQLALCHEMY_DATABASE_URI = os.environ.get("SQLALCHEMY_DATABASE_URI")
-SQLALCHEMY_ENGINE_OPTIONS = {
-    "connect_args": {"ssl": {"ca": certifi.where()}, "ssl_verify_identity": True}
-}
+SQLALCHEMY_ENGINE_OPTIONS = {}
