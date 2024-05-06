@@ -13,7 +13,7 @@ flask-cors = "^4.0"
 certifi = "*"
 sqlalchemy = "^1.4.51"
 Flask-SQLAlchemy = "^3.0.5"
-cryptography = "^42.0.0" # needed by PyMySQL
+cryptography = "^42.0.7" # needed by PyMySQL
 psycopg2-binary = "^2.9.9"
 
 [tool.poetry.group.updator.dependencies]
