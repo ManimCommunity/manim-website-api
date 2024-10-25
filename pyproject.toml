@@ -8,21 +8,21 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.8"
 flask = "^3.0"
-python-dotenv = "^0.21"
+python-dotenv = "^1.0"
 flask-cors = "^5.0"
 certifi = "*"
 sqlalchemy = "^1.4.51"
 Flask-SQLAlchemy = "^3.0.5"
 cryptography = "^43.0.3" # needed by PyMySQL
-psycopg2-binary = "^2.9.9"
+psycopg2-binary = "^2.9.10"
 
 [tool.poetry.group.updator.dependencies]
 requests = "^2"
 feedparser = "^6.0"
-google-api-python-client = "^2.51"
+google-api-python-client = "^2.149"
 
 [tool.poetry.group.dev.dependencies]
-black = "^23.11.0"
+black = "^24.8.0"
 ipdb = "^0.13.9"
 
 [build-system]
