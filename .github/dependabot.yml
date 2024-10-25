@@ -10,3 +10,5 @@ updates:
           applies-to: version-updates
           patterns:
             - "*"
+          exclude-patterns:
+            - "poetry"
