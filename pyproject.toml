@@ -19,7 +19,7 @@ psycopg2-binary = "^2.9.10"
 [tool.poetry.group.updator.dependencies]
 requests = "^2"
 feedparser = "^6.0"
-google-api-python-client = "^2.149"
+google-api-python-client = "^2.154"
 
 [tool.poetry.group.dev.dependencies]
 black = "^24.8.0"
