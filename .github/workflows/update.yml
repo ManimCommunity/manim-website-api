@@ -14,23 +14,25 @@ jobs:
     if: (github.repository == 'ManimCommunity/manim-website-api')
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
-      - name: Install poetry
-        run: |
-          pipx install poetry==1.5.*
-
-      - uses: actions/setup-python@v4
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
         with:
-          python-version: '3.10'
-          cache: 'poetry'
+          # Install a specific version of uv.
+          version: "0.5.26"
+          enable-cache: true
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version-file: ".python-version"
 
       - name: Install dependencies
         run: |
-          poetry install
+          uv sync --all-extras --locked
 
       - name: Run the updator
         env:
           SQLALCHEMY_DATABASE_URI: ${{ secrets.SQLALCHEMY_DATABASE_URI }}
         run: |
-          poetry run python -m updator
+          uv run python -m updator
