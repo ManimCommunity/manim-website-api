@@ -1,30 +1,42 @@
-[tool.poetry]
+[tool.uv]
+dev-dependencies = [
+    "black<25.0.0,>=24.8.0",
+    "ipdb<1.0.0,>=0.13.9",
+]
+
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
+
+[project]
+authors = [
+    {name = "Naveen M K", email = "naveen521kk@gmail.com"},
+]
+requires-python = "<4.0,>=3.8"
+dependencies = [
+    "flask<4.0,>=3.0",
+    "python-dotenv<2.0,>=1.0",
+    "flask-cors<6.0,>=5.0",
+    "certifi",
+    "sqlalchemy<2.0.0,>=1.4.51",
+    "Flask-SQLAlchemy<4.0.0,>=3.0.5",
+    "cryptography<44.0.0,>=43.0.3",
+    "psycopg2-binary<3.0.0,>=2.9.10",
+]
 name = "manim-website-api"
 version = "0.1.0"
 description = ""
-authors = ["Your Name <you@example.com>"]
 readme = "README.md"
 
-[tool.poetry.dependencies]
-python = "^3.8"
-flask = "^3.0"
-python-dotenv = "^1.0"
-flask-cors = "^5.0"
-certifi = "*"
-sqlalchemy = "^1.4.51"
-Flask-SQLAlchemy = "^3.0.5"
-cryptography = "^43.0.3" # needed by PyMySQL
-psycopg2-binary = "^2.9.10"
+[dependency-groups]
+dev = [
+    "black<25.0.0,>=24.8.0",
+    "ipdb<1.0.0,>=0.13.9",
+]
 
-[tool.poetry.group.updator.dependencies]
-requests = "^2"
-feedparser = "^6.0"
-google-api-python-client = "^2.159"
-
-[tool.poetry.group.dev.dependencies]
-black = "^24.8.0"
-ipdb = "^0.13.9"
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+[project.optional-dependencies]
+updator = [
+    "requests<3,>=2",
+    "feedparser<7.0,>=6.0",
+    "google-api-python-client<3.0,>=2.159",
+]
