@@ -857,7 +857,7 @@ requires-dist = [
     { name = "flask", specifier = ">=3.0,<4.0" },
     { name = "flask-cors", specifier = ">=5.0,<6.0" },
     { name = "flask-sqlalchemy", specifier = ">=3.0.5,<4.0.0" },
-    { name = "google-api-python-client", marker = "extra == 'updator'", specifier = ">=2.149,<3.0" },
+    { name = "google-api-python-client", marker = "extra == 'updator'", specifier = ">=2.159,<3.0" },
     { name = "psycopg2-binary", specifier = ">=2.9.10,<3.0.0" },
     { name = "python-dotenv", specifier = ">=1.0,<2.0" },
     { name = "requests", marker = "extra == 'updator'", specifier = ">=2,<3" },
