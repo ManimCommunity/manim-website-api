@@ -20,7 +20,7 @@ dependencies = [
     "certifi",
     "sqlalchemy<2.0.0,>=1.4.51",
     "Flask-SQLAlchemy<4.0.0,>=3.0.5",
-    "cryptography<44.0.0,>=43.0.3",
+    "cryptography>=43.0.3,<45.0.0",
     "psycopg2-binary<3.0.0,>=2.9.10",
 ]
 name = "manim-website-api"
